@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour {
 		else if (instance != this)
 			Destroy (gameObject);
 
-		DontDestroyOnLoad (gameObject);
+		DontDestroyOnLoad (gameObject); // appear between all the scenes
 	}
 
 	public void PlaySingle(AudioClip clip)

@@ -20,8 +20,8 @@ public class Enemy : MovingObject {
 
 	protected override void AttemptMove <T> (int xDir, int yDir)
 	{
-		if (skipMove) {
-			skipMove = false;
+		if (skipMove) {   // don't move if the last funtion is not finished?!
+			skipMove = false; // write that way make it looks so weird 
 			return;
 		}
 
@@ -40,12 +40,13 @@ public class Enemy : MovingObject {
 		else
 			xDir = target.position.x > transform.position.x ? 1 : -1;
 
-		AttemptMove <Player> (xDir, yDir);
+		AttemptMove <Player> (xDir, yDir); // Try move to Player, if not -> call OnCantMove -> blade player.
 	}
-
-	protected override void OnCantMove <T> (T component)
+	// that funt is calles when has 2 factors.
+	// !canmove => RaycastHit2D detect an object when moving and hitComponent is not null
+	protected override void OnCantMove <T> (T component) 
 	{
-		Player hitPlayer = component as Player;
+		Player hitPlayer = component as Player; 
 
 		hitPlayer.LoseFood (playerDamage);
 

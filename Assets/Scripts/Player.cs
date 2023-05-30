@@ -88,10 +88,10 @@ public class Player : MovingObject {
 #endif
 
 		if (horizontal != 0 || vertical != 0)
-			AttemptMove<Wall> (horizontal, vertical);
+			AttemptMove<Wall> (horizontal, vertical); // try to over the wall
 	}
 
-	protected override void AttemptMove <T> (int xDir, int yDir)
+	protected override void AttemptMove <T> (int xDir, int yDir) // 
 	{
 		food--;
 		foodText.text = "Food: " + food;
@@ -128,9 +128,11 @@ public class Player : MovingObject {
 
 	protected override void OnCantMove <T> (T component)
 	{
-		Wall hitWall = component as Wall;
-		hitWall.DamageWall (wallDamage);
-		animator.SetTrigger ("playerChop");
+		// hitWall is an instance of Wall, type casting hitwall ~ componet T, we consider component as Wall
+		// not standard, but can easy to use now!
+		Wall hitWall = component as Wall; 
+		hitWall.DamageWall (wallDamage); // call funt DamageWall of instance hitwall of class Wall
+		animator.SetTrigger ("playerChop"); // kill wall
 	}
 
 	private void Restart()
